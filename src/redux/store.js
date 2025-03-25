@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { act } from 'react';
 
 const initialState = {
   contacts: {
@@ -32,6 +31,14 @@ const rootReducer = (state = initialState, action) => {
           items: state.contacts.items.filter(
             contact => contact.id !== action.payload
           ),
+        },
+      };
+    }
+    case 'filters/setFilterByName': {
+      return {
+        ...state,
+        filters: {
+          name: action.payload,
         },
       };
     }

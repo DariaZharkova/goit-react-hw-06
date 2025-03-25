@@ -3,10 +3,14 @@ import Contact from '../Contact/Contact';
 import css from './ContactList.module.css';
 
 export default function ContactList() {
-  const items = useSelector(state => state.contacts.items);
+  const contacts = useSelector(state => state.contacts.items);
+  const filterByName = useSelector(state => state.filters.name);
+  const visibleContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filterByName.toLowerCase())
+  );
   return (
     <ul className={css.list}>
-      {items.map(item => (
+      {visibleContacts.map(item => (
         <li key={item.id} className={css.item}>
           <Contact item={item} />
         </li>
